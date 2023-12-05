@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Covid 19 ML Project</title>
+    <link rel="stylesheet" href="{%static 'mlapp/assets/css/style.css'%}" />
+    <script src="{%static 'mlapp/assets/js/script.js'%}"></script>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Additional styles can be placed here */
+      @media screen and (max-width: 768px) {
+        body {
+          width: 90%; /* Adjust as needed for smaller screens */
+        }
+      }
+
+      /* Add more media queries as needed */
+    </style>
+  </head>
+
+  <body>
+    <div class="nav">
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'aboutus' %}">About Us</a>
+      </nav>
+    </div>
+    <div class="notification">
+      <h2>Upload Your Image Here....</h2>
+    </div>
+    <div class="container">
+      <form
+        action="{% url 'predict_covid' %}"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <!--action="{% url 'output' %}"-->
+        {% csrf_token %}
+        <div class="input-div">
+          <input
+            class="input"
+            name="file"
+            type="file"
+            accept=".jpg,.jpeg,.png,.img"
+            required
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            fill="none"
+            stroke="currentColor"
+            class="icon"
+          >
+            <polyline points="16 16 12 12 8 16"></polyline>
+            <line y2="21" x2="12" y1="12" x1="12"></line>
+            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+            <polyline points="16 16 12 12 8 16"></polyline>
+          </svg>
+        </div>
+        <div class="info">
+          <ul class="output-list"></ul>
+        </div>
+        <button class="button" type="submit" disabled>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            viewBox="0 0 20 20"
+            height="20"
+            fill="none"
+            class="svg-icon"
+          >
+            <g stroke-width="1.5" stroke-linecap="round" stroke="#ffffff">
+              <circle r="2.5" cy="10" cx="10"></circle>
+              <path
+                fill-rule="evenodd"
+                d="m8.39079 2.80235c.53842-1.51424 2.67991-1.51424 3.21831-.00001.3392.95358 1.4284 1.40477 2.3425.97027 1.4514-.68995 2.9657.82427 2.2758 2.27575-.4345.91407.0166 2.00334.9702 2.34248 1.5143.53842 1.5143 2.67996 0 3.21836-.9536.3391-1.4047 1.4284-.9702 2.3425.6899 1.4514-.8244 2.9656-2.2758 2.2757-.9141-.4345-2.0033 .0167-2.3425.9703-.5384 1.5142-2.67989 1.5142-3.21831 0-.33914-.9536-1.4284-1.4048-2.34247-.9703-1.45148.6899-2.96571-.8243-2.27575-2.2757.43449-.9141-.01669-2.0034-.97028-2.3425-1.51422-.5384-1.51422-2.67994.00001-3.21836.95358-.33914 1.40476-1.42841 .97027-2.34248-.68996-1.45148.82427-2.9657 2.27575-2.27575.91407.4345 2.00333-.01669 2.34247-.97026z"
+                clip-rule="evenodd"
+              ></path>
+            </g>
+          </svg>
+          <span class="lable">Proceed</span>
+        </button>
+      </form>
+    </div>
+    {% if prediction %}
+    <div class="results">
+      <h2>Prediction Result:</h2>
+      <p>{{ prediction }}</p>
+    </div>
+    {% endif %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

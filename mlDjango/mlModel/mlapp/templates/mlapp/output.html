@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Output</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+      .heading {
+        color: blue;
+      }
+      .output {
+        width: 70%;
+        margin: auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 50px;
+        text-align: center;
+      }
+
+      h2 {
+        color: #333;
+      }
+
+      p {
+        color: #666;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .back-button {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .back-button:hover {
+        background-color: #45a049;
+      }
+      .notification-negative {
+        color: #45a049;
+      }
+      .notification-positive {
+        color: #ff0000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="output">
+      <h2 class="heading">Prediction Result:</h2>
+      <p>{{ prediction }}</p>
+      <a href="{% url 'index' %}" class="back-button">Back to Index</a>
+    </div>
+  </body>
+</html>
